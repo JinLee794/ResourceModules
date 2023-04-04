@@ -10,5 +10,19 @@
                 }
             }
         }
+    },
+    "moduleAliases": {
+        "br": {
+            "modules": {
+                "registry": "bicepdemoacr001.azurecr.io",
+                "modulePath": "bicep/modules"
+            }
+        }
+    },
+    "cloud": {
+        "credentialPrecedence": [
+            "AzureCLI",
+            "AzurePowerShell"
+        ]
     }
 }

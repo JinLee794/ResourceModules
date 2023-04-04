@@ -73,7 +73,8 @@ function Get-ModulesMissingFromPrivateBicepRegistry {
 
         if (-not (Get-AzContainerRegistry -Name $BicepRegistryName -ResourceGroupName $BicepRegistryRgName -ErrorAction 'SilentlyContinue')) {
             $missingTemplatePaths = $availableModuleTemplatePaths
-        } else {
+        }
+        else {
             # Test all children against ACR
             $missingTemplatePaths = @()
             foreach ($templatePath in $availableModuleTemplatePaths) {
@@ -82,6 +83,10 @@ function Get-ModulesMissingFromPrivateBicepRegistry {
                 $moduleRegistryIdentifier = Get-PrivateRegistryRepositoryName -TemplateFilePath $templatePath
 
                 $null = Get-AzContainerRegistryTag -RepositoryName $moduleRegistryIdentifier -RegistryName $BicepRegistryName -ErrorAction 'SilentlyContinue' -ErrorVariable 'result'
+
+
+                Write-Verbose "[TEST L:88] Response: " -Verbose
+                Write-Verbose ($result.exception.Response | ConvertTo-Json | Out-String) -Verbose
 
                 if ($result.exception.Response.StatusCode -eq 'NotFound') {
                     $missingTemplatePaths += $templatePath
