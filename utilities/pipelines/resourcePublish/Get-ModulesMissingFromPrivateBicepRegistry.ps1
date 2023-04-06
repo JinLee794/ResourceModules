@@ -88,7 +88,7 @@ function Get-ModulesMissingFromPrivateBicepRegistry {
                 Write-Verbose "[TEST L:88] Response: " -Verbose
                 Write-Verbose ($result.exception.Response | ConvertTo-Json | Out-String) -Verbose
 
-                if ($result.exception.Response.StatusCode -eq 'NotFound') {
+                if ($result.exception.Response.StatusCode -eq 'NotFound' -or $null -eq $result.exception.Response ) {
                     $missingTemplatePaths += $templatePath
                 }
             }
