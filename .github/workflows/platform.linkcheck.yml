@@ -23,7 +23,7 @@ jobs:
       - name: Check Broken Links
         if: always()
         id: checker
-        uses: lycheeverse/lychee-action@v1.6.1
+        uses: lycheeverse/lychee-action@v1.8.0
         with:
           args: --verbose --no-progress './**/*.md' --accept 200,201,403,429,401 --exclude-path .lycheeignore --include ^file:.*docs.*wiki.*media.*$
           fail: true
